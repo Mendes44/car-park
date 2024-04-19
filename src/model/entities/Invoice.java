@@ -30,8 +30,9 @@ public class Invoice {
 		this.tax = tax;
 	}
 	
+	//Calcula o valor total
 	public Double getTotalPayment() {
-		return getBasicPayment() - tax;
+		return getBasicPayment() + tax;
 	}
 	
 	
