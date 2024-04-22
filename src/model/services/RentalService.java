@@ -11,13 +11,14 @@ public class RentalService {
 	private Double pricePerHours;
 	private Double pricePerDays;
 	
-	private BrazilTaxService brTaxService;
+	//Aqui estou falando que minha classe RentalService depende da minha interface onde me possibilita uma melhor manutenção.
+	private TaxService TaxService;
 	
-	public RentalService(Double pricePerHours, Double pricePerDays, BrazilTaxService brTaxservice) {
+	public RentalService(Double pricePerHours, Double pricePerDays, TaxService Taxservice) {
 
 		this.pricePerHours = pricePerHours;
 		this.pricePerDays = pricePerDays;
-		this.brTaxService = brTaxservice;
+		this.TaxService = Taxservice;
 	}
 	
 	//Função para calcular o valor do aluguel. Onde se passar de 12 horas será cobrado por dia.
@@ -34,7 +35,7 @@ public class RentalService {
 			basicPayment = pricePerDays * Math.ceil(hours/24.0);
 		}
 		
-		double tax = brTaxService.tax(basicPayment);
+		double tax = TaxService.tax(basicPayment);
 		
 		carRental.setInvoice(new Invoice(basicPayment,tax));
 		/*Utilizei o Math.ceil para arredondar o valor da hora para cima, 
